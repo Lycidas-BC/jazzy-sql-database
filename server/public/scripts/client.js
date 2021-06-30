@@ -96,7 +96,7 @@ function renderArtists( listOfArtists ) {
         $('#artistTableBody').append(`
                 <tr>
                     <td>${artist.name}</td>
-                    <td>${artist.birthdate}</td>
+                    <td>${prettyDate(artist.birthdate)}</td>
                 </tr>`
         );
     }
@@ -111,8 +111,21 @@ function renderSongs(listOfSongs) {
                 <tr>
                     <td>${song.title}</td>
                     <td>${song.length}</td>
-                    <td>${song.released}</td>
+                    <td>${prettyDate(song.released)}</td>
                 </tr>`
             );
     }
 }
+
+function prettyDate(unformattedDate) {
+    const dateString = new Date(unformattedDate);
+
+    const year = dateString.getFullYear();
+    let month = (1 + dateString.getMonth()).toString() ;
+    let day = dateString.getDate().toString();
+
+    month = month.length === 1 ? '0' + month : month;
+    day = day.length === 1 ? '0' + day : day;
+
+    return month + '-' + day + '-' + year;
+} //end prettyDate
